@@ -66,7 +66,7 @@ public class ProductRepositoryIntegrationTest {
     // create the table for testing purposes
     @Before
     public void createTable() throws InterruptedException, TTransportException, ConfigurationException, IOException {
-        adminTemplate.createTable(true, CqlIdentifier.cqlId(DATA_TABLE_NAME), Product.class, new HashMap<String, Object>());
+        adminTemplate.createTable(true, CqlIdentifier.of(DATA_TABLE_NAME), Product.class, new HashMap<String, Object>());
     }
 
     @Test
@@ -104,7 +104,7 @@ public class ProductRepositoryIntegrationTest {
     // Once done testing, drop the table
     @After
     public void dropTable() {
-        adminTemplate.dropTable(CqlIdentifier.cqlId(DATA_TABLE_NAME));
+        adminTemplate.dropTable(CqlIdentifier.of(DATA_TABLE_NAME));
     }
 
     // Stop the embedded cassandra server once done running the test cases
