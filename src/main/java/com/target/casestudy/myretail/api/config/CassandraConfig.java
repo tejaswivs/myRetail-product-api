@@ -27,24 +27,12 @@ import org.springframework.data.cassandra.core.mapping.BasicCassandraMappingCont
 import org.springframework.data.cassandra.core.mapping.CassandraMappingContext;
 import org.springframework.data.cassandra.core.mapping.SimpleUserTypeResolver;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
-
 @Configuration
 @EnableCassandraRepositories("com.target.casestudy.myretail.api.repositories")
 public class CassandraConfig extends AbstractCassandraConfiguration {
 
     private static final Log LOGGER = LogFactory.getLog(CassandraConfig.class);
-
-    @Value("${cassandra.ip}")
-    private String contactPoints;
-
-    @Value("${cassandra.port}")
-    private int port;
-
-    @Value("${cassandra.keyspace}")
-    private String keySpace;
-
-    @Value("${cassandra.packagescan}")
-    private String packageScan;
+    private static final String kepSpace = "my_retail";
 
     @PostConstruct
     public void startEmbeddedCassandra() throws InterruptedException, IOException, TTransportException {
@@ -59,7 +47,7 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
     }
 
     protected List<CreateKeyspaceSpecification> getKeyspaceCreations() {
-        return Collections.singletonList(CreateKeyspaceSpecification.createKeyspace(keySpace)
+        return Collections.singletonList(CreateKeyspaceSpecification.createKeyspace(kepSpace)
                 .ifNotExists()
                 .with(KeyspaceOption.DURABLE_WRITES, true)
                 .withSimpleReplication());
@@ -69,8 +57,8 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
     public CassandraCqlClusterFactoryBean cluster() {
         CassandraCqlClusterFactoryBean bean = new CassandraCqlClusterFactoryBean();
         bean.setKeyspaceCreations(getKeyspaceCreations());
-        bean.setContactPoints(contactPoints);
-        bean.setPort(port);
+        bean.setContactPoints("127.0.0.1");
+        bean.setPort(9142);
         return bean;
     }
 
@@ -78,7 +66,7 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
     public CassandraSessionFactoryBean session() {
         CassandraSessionFactoryBean session = new CassandraSessionFactoryBean();
         session.setCluster(cluster().getObject());
-        session.setKeyspaceName(keySpace);
+        session.setKeyspaceName(kepSpace);
         try {
             session.setConverter(converter());
         } catch (Exception e) {
@@ -91,7 +79,7 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
 
     @Override
     protected String getKeyspaceName() {
-        return keySpace;
+        return kepSpace;
     }
 
     @Bean
@@ -99,13 +87,12 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
         return new MappingCassandraConverter(mappingContext());
     }
 
-
     @Bean
     public CassandraMappingContext mappingContext() throws Exception {
         CassandraMappingContext mappingContext = new CassandraMappingContext();
-        mappingContext.setInitialEntitySet(CassandraEntityClassScanner.scan(packageScan));
+        mappingContext.setInitialEntitySet(CassandraEntityClassScanner.scan("com.target.casestudy.myretail.api.domain"));
         mappingContext.setUserTypeResolver(new
-                SimpleUserTypeResolver(cluster().getObject(), keySpace));
+                SimpleUserTypeResolver(cluster().getObject(), kepSpace));
         return mappingContext;
     }
 

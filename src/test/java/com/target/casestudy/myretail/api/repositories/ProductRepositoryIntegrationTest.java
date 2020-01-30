@@ -1,35 +1,34 @@
 package com.target.casestudy.myretail.api.repositories;
 
-import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.Session;
-import com.target.casestudy.myretail.api.config.CassandraConfig;
-import com.target.casestudy.myretail.api.domain.Price;
-import com.target.casestudy.myretail.api.domain.Product;
-import com.target.casestudy.myretail.api.repositories.ProductRepository;
-import org.apache.cassandra.exceptions.ConfigurationException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.thrift.transport.TTransportException;
-import org.cassandraunit.utils.EmbeddedCassandraServerHelper;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.cassandra.core.CassandraAdminOperations;
-import org.springframework.data.cassandra.core.CassandraOperations;
-import org.springframework.data.cassandra.core.cql.CqlIdentifier;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
+
+import org.apache.cassandra.exceptions.ConfigurationException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.thrift.transport.TTransportException;
+import org.cassandraunit.utils.EmbeddedCassandraServerHelper;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.cassandra.core.CassandraAdminOperations;
+import org.springframework.data.cassandra.core.cql.CqlIdentifier;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.Session;
+import com.target.casestudy.myretail.api.config.CassandraConfig;
+import com.target.casestudy.myretail.api.domain.Price;
+import com.target.casestudy.myretail.api.domain.Product;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {CassandraConfig.class, ProductRepository.class})
@@ -92,14 +91,14 @@ public class ProductRepositoryIntegrationTest {
 
         //Update the product price
         BigDecimal updatedPrice = new BigDecimal(121);
-        product.setPrice(new Price(updatedPrice, "USD"));
+        product.setCurrent_price(new Price(updatedPrice, "USD"));
         productRepository.save(product);
 
         // when
         Product retrievedProduct = productRepository.findById(111).orElse(null);
 
         // then
-        assertEquals(updatedPrice, retrievedProduct.getPrice().getValue());
+        assertEquals(updatedPrice, retrievedProduct.getCurrent_price().getValue());
     }
 
     // Once done testing, drop the table
