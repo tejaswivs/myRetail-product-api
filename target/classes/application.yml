@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: myRetail-product-api
+
+extensiveProductDetailApi:
+  host: https://redsky.target.com
+  path: /v2/pdp/tcin
+
+cassandra:
+  ip: 127.0.0.1
+  port: 9142
+  keyspace: my_retail
+  packagescan: com.target.casestudy.myretail.api.domain
+

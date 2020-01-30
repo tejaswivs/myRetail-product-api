@@ -1,0 +1,13 @@
+/Users/b2013/IdeaProjects/myretailapp/src/main/java/com/target/casestudy/myretail/api/MyRetailApplication.java
+/Users/b2013/IdeaProjects/myretailapp/src/main/java/com/target/casestudy/myretail/api/repositories/ProductRepository.java
+/Users/b2013/IdeaProjects/myretailapp/src/main/java/com/target/casestudy/myretail/api/service/ProductPriceService.java
+/Users/b2013/IdeaProjects/myretailapp/src/main/java/com/target/casestudy/myretail/api/service/ProductDetailAggregatorService.java
+/Users/b2013/IdeaProjects/myretailapp/src/main/java/com/target/casestudy/myretail/api/domain/Price.java
+/Users/b2013/IdeaProjects/myretailapp/src/main/java/com/target/casestudy/myretail/api/config/CassandraConfig.java
+/Users/b2013/IdeaProjects/myretailapp/src/main/java/com/target/casestudy/myretail/api/controllers/ProductController.java
+/Users/b2013/IdeaProjects/myretailapp/src/main/java/com/target/casestudy/myretail/api/service/ProductDetailAggregatorServiceImpl.java
+/Users/b2013/IdeaProjects/myretailapp/src/main/java/com/target/casestudy/myretail/api/service/ExtensiveProductDetailService.java
+/Users/b2013/IdeaProjects/myretailapp/src/main/java/com/target/casestudy/myretail/api/domain/Product.java
+/Users/b2013/IdeaProjects/myretailapp/src/main/java/com/target/casestudy/myretail/api/error/NotFoundException.java
+/Users/b2013/IdeaProjects/myretailapp/src/main/java/com/target/casestudy/myretail/api/service/ExtensiveProductDetailServiceImpl.java
+/Users/b2013/IdeaProjects/myretailapp/src/main/java/com/target/casestudy/myretail/api/service/ProductPriceServiceImpl.java
