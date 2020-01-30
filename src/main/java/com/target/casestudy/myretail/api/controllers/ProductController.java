@@ -31,16 +31,16 @@ public class ProductController {
 
     /* Performs an HTTP PUT to update the product's price in the data store .
      * The price to be updated is obtained from the JSON request body
-     * The method will throw "product not found" exception when tried to update
-     * a non-existing product.
+     * The method will throw "product not found" exception when a try to update
+     * a non-existing product is made.
      */
     @PutMapping("/products/{productId}")
-    public ResponseEntity updateProduct(@RequestBody @Valid Product productPriceUpdate, @PathVariable("productId") Integer productId) {
+    public ResponseEntity<String> updateProduct(@RequestBody @Valid Product productPriceUpdate, @PathVariable("productId") Integer productId) {
         Product product = productRepository.findByIds(productId);
         if (product != null) {
-            product.setPrice(productPriceUpdate.getPrice());
+            product.setCurrent_price(productPriceUpdate.getCurrent_price());
             productRepository.save(product);
-            return new ResponseEntity("product price has been updated successfully",
+            return new ResponseEntity<String>("product price has been updated successfully",
                     HttpStatus.OK);
         } else throw new NotFoundException("no product with ID {}", productId);
     }

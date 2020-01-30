@@ -1,20 +1,24 @@
 package com.target.casestudy.myretail.api.config;
 
-import com.datastax.driver.core.Session;
-import com.target.casestudy.myretail.api.domain.Product;
-import io.micrometer.core.instrument.util.IOUtils;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.thrift.transport.TTransportException;
 import org.cassandraunit.utils.EmbeddedCassandraServerHelper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
-import org.springframework.data.cassandra.config.*;
-import org.springframework.data.cassandra.core.CassandraOperations;
-import org.springframework.data.cassandra.core.CassandraTemplate;
+import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
+import org.springframework.data.cassandra.config.CassandraCqlClusterFactoryBean;
+import org.springframework.data.cassandra.config.CassandraEntityClassScanner;
+import org.springframework.data.cassandra.config.CassandraSessionFactoryBean;
+import org.springframework.data.cassandra.config.SchemaAction;
 import org.springframework.data.cassandra.core.convert.CassandraConverter;
 import org.springframework.data.cassandra.core.convert.MappingCassandraConverter;
 import org.springframework.data.cassandra.core.cql.keyspace.CreateKeyspaceSpecification;
@@ -23,15 +27,6 @@ import org.springframework.data.cassandra.core.mapping.BasicCassandraMappingCont
 import org.springframework.data.cassandra.core.mapping.CassandraMappingContext;
 import org.springframework.data.cassandra.core.mapping.SimpleUserTypeResolver;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 @Configuration
 @EnableCassandraRepositories("com.target.casestudy.myretail.api.repositories")
@@ -104,9 +99,10 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
         return new MappingCassandraConverter(mappingContext());
     }
 
+
     @Bean
     public CassandraMappingContext mappingContext() throws Exception {
-        BasicCassandraMappingContext mappingContext = new BasicCassandraMappingContext();
+        CassandraMappingContext mappingContext = new CassandraMappingContext();
         mappingContext.setInitialEntitySet(CassandraEntityClassScanner.scan(packageScan));
         mappingContext.setUserTypeResolver(new
                 SimpleUserTypeResolver(cluster().getObject(), keySpace));

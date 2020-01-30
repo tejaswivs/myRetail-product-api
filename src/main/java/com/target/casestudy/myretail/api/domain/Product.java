@@ -1,28 +1,18 @@
 package com.target.casestudy.myretail.api.domain;
 
-import com.datastax.driver.core.DataType;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import org.springframework.data.cassandra.core.mapping.CassandraType;
-import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
-import com.datastax.driver.core.DataType.Name;
-
-
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.UUID;
 
 @Table("products")
 public class Product {
 
     @PrimaryKey private Integer id;
-    private String productName;
-    private Price price;
+    private String name;
+    private Price current_price;
 
     public Product(Integer id, Price price) {
         this.id = id;
-        this.price = price;
+        this.current_price = price;
     }
 
     public Product() {}
@@ -35,19 +25,19 @@ public class Product {
         this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String productName) {
+        this.name = productName;
     }
 
-    public Price getPrice() {
-        return price;
+    public Price getCurrent_price() {
+        return current_price;
     }
 
-    public void setPrice(Price price) {
-        this.price = price;
+    public void setCurrent_price(Price price) {
+        this.current_price = price;
     }
 }

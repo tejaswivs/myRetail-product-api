@@ -1,19 +1,18 @@
 package com.target.casestudy.myretail.api.service;
 
-import com.target.casestudy.myretail.api.domain.Price;
-import com.target.casestudy.myretail.api.domain.Product;
+import static org.junit.Assert.assertEquals;
+
+import java.math.BigDecimal;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Matchers.any;
-
-import java.math.BigDecimal;
+import com.target.casestudy.myretail.api.domain.Price;
+import com.target.casestudy.myretail.api.domain.Product;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductDetailAggregatorServiceImplUTest {
@@ -40,9 +39,9 @@ public class ProductDetailAggregatorServiceImplUTest {
         Product retrievedProduct = productDetailAggregatorService.getProductDetail(productId);
 
         // then
-        assertEquals(productValue, retrievedProduct.getPrice().getValue());
-        assertEquals("USD", retrievedProduct.getPrice().getCurrencyCode());
-        assertEquals("This is my first product", retrievedProduct.getProductName());
+        assertEquals(productValue, retrievedProduct.getCurrent_price().getValue());
+        assertEquals("USD", retrievedProduct.getCurrent_price().getCurrency_code());
+        assertEquals("This is my first product", retrievedProduct.getName());
 
     }
 
@@ -59,8 +58,8 @@ public class ProductDetailAggregatorServiceImplUTest {
         Product retrievedProduct = productDetailAggregatorService.getProductDetail(productId);
 
         // then
-        assertEquals(null, retrievedProduct.getProductName());
-        assertEquals(null, retrievedProduct.getPrice());
+        assertEquals(null, retrievedProduct.getName());
+        assertEquals(null, retrievedProduct.getCurrent_price());
     }
 
     @Test
@@ -77,10 +76,10 @@ public class ProductDetailAggregatorServiceImplUTest {
 
         // then
         // retrieves product name
-        assertEquals("dummy product name", retrievedProduct.getProductName());
+        assertEquals("dummy product name", retrievedProduct.getName());
 
         // no price for the product
-        assertEquals(null, retrievedProduct.getPrice());
+        assertEquals(null, retrievedProduct.getCurrent_price());
     }
 
     @Test
@@ -98,10 +97,10 @@ public class ProductDetailAggregatorServiceImplUTest {
 
         // then
         // retrieves product price
-        assertEquals(productValue, retrievedProduct.getPrice().getValue());
-        assertEquals("USD", retrievedProduct.getPrice().getCurrencyCode());
+        assertEquals(productValue, retrievedProduct.getCurrent_price().getValue());
+        assertEquals("USD", retrievedProduct.getCurrent_price().getCurrency_code());
 
         // no name for the product found
-        assertEquals(null, retrievedProduct.getProductName());
+        assertEquals(null, retrievedProduct.getName());
     }
 }

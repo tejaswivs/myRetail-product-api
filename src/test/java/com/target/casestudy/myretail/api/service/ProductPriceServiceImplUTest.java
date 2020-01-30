@@ -39,8 +39,8 @@ public class ProductPriceServiceImplUTest {
         Product retrievedProduct = service.getProductPrice(1423432);
 
         // then
-        assertEquals(retrievedProduct.getPrice().getValue(), value);
-        assertEquals(currencyCode, retrievedProduct.getPrice().getCurrencyCode());
+        assertEquals(retrievedProduct.getCurrent_price().getValue(), value);
+        assertEquals(currencyCode, retrievedProduct.getCurrent_price().getCurrency_code());
     }
 
     @Test

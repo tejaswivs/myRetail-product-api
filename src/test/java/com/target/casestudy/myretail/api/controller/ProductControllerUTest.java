@@ -43,16 +43,16 @@ public class ProductControllerUTest {
         Price price = new Price(productValue, "USD");
         Integer productId = 12345;
         Product product = new Product(productId, price);
-        product.setProductName("This is my first product");
+        product.setName("This is my first product");
         Mockito.when(productDetailAggregatorService.getProductDetail(productId)).thenReturn(product);
 
         // when
         Product retrievedProduct = controller.getProduct(productId);
 
         // then
-        assertEquals(productValue, retrievedProduct.getPrice().getValue());
-        assertEquals("USD", retrievedProduct.getPrice().getCurrencyCode());
-        assertEquals("This is my first product", retrievedProduct.getProductName());
+        assertEquals(productValue, retrievedProduct.getCurrent_price().getValue());
+        assertEquals("USD", retrievedProduct.getCurrent_price().getCurrency_code());
+        assertEquals("This is my first product", retrievedProduct.getName());
     }
 
     @Test

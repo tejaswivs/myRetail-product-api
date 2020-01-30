@@ -1,10 +1,10 @@
 package com.target.casestudy.myretail.api.repositories;
 
-import com.target.casestudy.myretail.api.domain.Product;
 import org.springframework.data.cassandra.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+
+import com.target.casestudy.myretail.api.domain.Product;
 
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Integer> {

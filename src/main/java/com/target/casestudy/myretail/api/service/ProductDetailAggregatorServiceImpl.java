@@ -21,7 +21,7 @@ public class ProductDetailAggregatorServiceImpl implements ProductDetailAggregat
         product = productPriceService.getProductPrice(productId);
         // get the product name from the external service
         String productName = extensiveProductDetailService.getProductName(productId);
-        if(productName != null) product.setProductName(productName);
+        if(productName != null) product.setName(productName);
         return product;
     }
 }

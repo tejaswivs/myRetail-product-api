@@ -40,8 +40,8 @@ public class ProductControllerITest {
 
         // then
         assertThat(productDetail.getId(), is(equalTo(13860428)));
-        assertThat(productDetail.getProductName(), is(equalTo("The Big Lebowski (Blu-ray)")));
-        assertThat(productDetail.getPrice().getValue(), is(equalTo(new BigDecimal(13.49).setScale(2, RoundingMode.HALF_UP))));
+        assertThat(productDetail.getName(), is(equalTo("The Big Lebowski (Blu-ray)")));
+        assertThat(productDetail.getCurrent_price().getValue(), is(equalTo(new BigDecimal(13.49).setScale(2, RoundingMode.HALF_UP))));
     }
 
     @Test
@@ -59,27 +59,6 @@ public class ProductControllerITest {
         // then
         assertEquals(HttpStatus.OK, responseStatus);
     }
-
-//    @Test
-//    public void getProductDetailById_whenProductNotPresent__throwsNotFoundException() {
-//        thrown.expect(NotFoundException.class);
-//        thrown.expectMessage("no product with ID 12345");
-//        Product productDetail = restTemplate.getForObject("/products/12345", Product.class);
-//    }
-
-//    @Test
-//    public void updateProductDetailById_whenProductNotPresent__throwsNotFoundException() {
-//        thrown.expect(NotFoundException.class);
-//        thrown.expectMessage("no product with ID 12345");
-//
-//        Price newPrice = new Price(new BigDecimal(15.51), "USD");
-//        Integer productId = 12345;
-//        Product updateProduct = new Product(productId, newPrice);
-//        HttpEntity<Product> request = new HttpEntity<>(updateProduct);
-//        restTemplate.exchange("/products/"+productId, HttpMethod.PUT,request,String.class).getStatusCode();
-//    }
-
-
 
 
 }
