@@ -22,7 +22,7 @@ runs on 127.0.0.1:9142. With the help of embedded server we don't need to have a
 Action | Path            | Description             |  Sample URL     |
 -------|-----------------|-------------------------| ----------------|
  GET   |`/product/{productId}` | returns a JSON object of product containing aggregated product detail from multiple resources |  
- PUT   |`/product/{productId}` | a PUT operation which updates the product price in the data store |  http://localhost:8084/products/13860428 
+ PUT   |`/product/{productId}` | a PUT operation which updates the product price in the data store |  http://localhost:8080/products/13860428 
     
     Sample URLs
         Getting a product detail 
